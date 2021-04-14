@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="login.css">
+<h1>Welcome to NBA Courtside</h1>
+<div class="log-form">
+    <h2>Login to your account</h2>
+   <div class = "UI">
+     <div class = "backgroundImg">
+      <form  method = "POST" action = "db/authentication.php" >
+        <input type="text" title="username" placeholder="username" name = "username" />
+        <input type="password" title="username" placeholder="password" name = "password"/>
+        <button type="submit" class="btn" >Login <a href="login.html"></a></button>
+        <!-- <a class = "btn" href = "mainPage.html"></a> -->
+       <a href="signup.html"> Signup</a> 
+       <br/> 
+        <a class="forgot" href="#">Forgot Username?</a>
+      </form>
+
+     </div>
+    
+
+   </div>
+   <div id="player"></div>
+        <script>
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+      
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubeIframeAPIReady() {
+              player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'AvhplYM46Fc',
+                playerVars:{
+                    color:'white',
+                    playlist: 'PL4Tgil4cVoFvg7cr6Ha0m2U15puyHRWXO',
+                    loop:'1'
+                },
+                events: {
+                  'onReady': function(event){
+                      event.target.setVolume(3);
+                      event.target.playVideo();
+                  }
+                }
+              });
+            }
+      
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+              event.target.playVideo();
+            }
+      
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            var done = false;
+            function onPlayerStateChange(event) {
+              if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+              }
+            }
+            function stopVideo() {
+              player.stopVideo();
+            }
+
+            function mutePlayer(event) {
+              player.setVolume(0);
+            }
+            function unmutePlayer(event) {
+              player.setVolume(3);
+            }
+
+          </script>
+
+        <script>
+          function muteSite(){
+            var speaker = document.getElementById("speaker");
+            
+
+            if (speaker.classList.contains("mute")){
+              unmutePlayer();
+              speaker.classList.remove("mute")
+            }else{
+              mutePlayer();
+              speaker.classList.add("mute");
+            }
+            
+          }
+        </script>
+  </div><!--end log form -->
